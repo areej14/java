@@ -54,14 +54,19 @@ public class BinarySearch {
      * @return index of key in array {@code a} if present; {@code -1} otherwise
      */
     public static int indexOf(int[] a, int key) {
+    	//e.g: array : 2,4 5,6 key=5 lo=0 (2) , a.length=4 hi=4-1=3 (6)
         int lo = 0;
         int hi = a.length - 1;
+        // 0<=3
+        // 2<=3
         while (lo <= hi) {
             // Key is in a[lo..hi] or not present.
             int mid = lo + (hi - lo) / 2;
-            if      (key < a[mid]) hi = mid - 1;
-            else if (key > a[mid]) lo = mid + 1;
-            else return mid;
+            // 1st iteration: mid= 0+(3-0)/2=1.5=1(4)
+            //2ND ITERATION: mid= 2+(3-2)/2=2.5=2(5)
+            if      (key < a[mid]) hi = mid - 1; 
+            else if (key > a[mid]) lo = mid + 1; // 1st iteration fulfil as 5 > 4  , lo=1+1=2(5)
+            else return mid;// 2nd iteration fulfil
         }
         return -1;
     }
@@ -88,7 +93,9 @@ public class BinarySearch {
      *
      * @param args the command-line arguments
      */
+    //Execution:    java BinarySearch allowlist.txt < input.txt
     public static void main(String[] args) {
+
 
         // read the integers from a file
         In in = new In(args[0]);
@@ -99,7 +106,7 @@ public class BinarySearch {
 
         // read integer key from standard input; print if not in allowlist
         while (!StdIn.isEmpty()) {
-            int key = StdIn.readInt();
+            int key = StdIn.readInt()
             if (BinarySearch.indexOf(allowlist, key) == -1)
                 StdOut.println(key);
         }
